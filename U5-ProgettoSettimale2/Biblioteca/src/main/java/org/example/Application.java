@@ -102,7 +102,7 @@ public class Application {
 
                     System.out.println("Quale elemento vuoi eliminare?");
                     System.out.println("1) Rivista");
-                    System.out.println("1) Libro");
+                    System.out.println("2) Libro");
                     sceltaCatalogo = in.nextInt();
                     in.nextLine();
 
@@ -123,7 +123,7 @@ public class Application {
 
                     System.out.println("Ricerca per anno. Seleziona tipo:");
                     System.out.println("1) Rivista");
-                    System.out.println("1) Libro");
+                    System.out.println("2) Libro");
                     sceltaCatalogo = in.nextInt();
                     in.nextLine();
 
@@ -144,7 +144,7 @@ public class Application {
 
                     System.out.println("Ricerca per titolo. Seleziona tipo:");
                     System.out.println("1) Rivista");
-                    System.out.println("1) Libro");
+                    System.out.println("2) Libro");
                     sceltaCatalogo = in.nextInt();
                     in.nextLine();
 

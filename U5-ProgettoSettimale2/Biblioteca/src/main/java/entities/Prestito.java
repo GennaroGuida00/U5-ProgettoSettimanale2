@@ -20,10 +20,10 @@ public class Prestito {
     private LocalDate dataInizioPrestito;
 
     @Column(name = "data_restituzione_previsto")
-    private LocalDate dataRestituzionePrevisto;
+    private LocalDate dataRestituzionePrevista;
 
     @Column(name = "data_restituzione_effettivo")
-    private LocalDate dataRestituzioneEffettivo;
+    private LocalDate dataRestituzioneEffettiva;
 
     @ManyToOne
     @JoinColumn(name = "utente_id")
@@ -33,8 +33,8 @@ public class Prestito {
         this.idPrestito = idPrestito;
         this.elemento = elemento;
         this.dataInizioPrestito = dataInizioPrestito;
-        this.dataRestituzioneEffettivo = dataRestituzioneEffettivo;
-        this.dataRestituzionePrevisto = dataRestituzionePrevisto;
+        this.dataRestituzioneEffettiva = dataRestituzioneEffettivo;
+        this.dataRestituzionePrevista = dataRestituzionePrevisto;
         this.utente = utente;
     }
 
@@ -66,19 +66,19 @@ public class Prestito {
     }
 
     public LocalDate getDataRestituzionePrevisto() {
-        return dataRestituzionePrevisto;
+        return dataRestituzionePrevista;
     }
 
     public void setDataRestituzionePrevisto(LocalDate dataRestituzionePrevisto) {
-        this.dataRestituzionePrevisto = dataRestituzionePrevisto;
+        this.dataRestituzionePrevista = dataRestituzionePrevisto;
     }
 
     public LocalDate getDataRestituzioneEffettivo() {
-        return dataRestituzioneEffettivo;
+        return dataRestituzioneEffettiva;
     }
 
     public void setDataRestituzioneEffettivo(LocalDate dataRestituzioneEffettivo) {
-        this.dataRestituzioneEffettivo = dataRestituzioneEffettivo;
+        this.dataRestituzioneEffettiva = dataRestituzioneEffettivo;
     }
 
     public Utente getUtente() {
@@ -93,11 +93,11 @@ public class Prestito {
     public String toString() {
         return "Prestito{" +
                 "idPrestito=" + idPrestito +
-                ", elemento=" + elemento +
+
                 ", dataInizioPrestito=" + dataInizioPrestito +
-                ", dataRestituzionePrevisto=" + dataRestituzionePrevisto +
-                ", dataRestituzioneEffettivo=" + dataRestituzioneEffettivo +
-                ", utente=" + utente +
+                ", dataRestituzionePrevisto=" + dataRestituzionePrevista+
+                ", dataRestituzioneEffettivo=" + dataRestituzioneEffettiva +
+
                 '}';
     }
 }

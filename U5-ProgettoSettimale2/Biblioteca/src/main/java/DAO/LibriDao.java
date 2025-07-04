@@ -65,7 +65,7 @@ public class LibriDao {
 
     public List<Libro> findByTitol(String titolo){
         String titoloDacercare="%"+titolo+"%";
-        TypedQuery<Libro> query= entityManager.createQuery("SELECT l from Libro l where l.autore LIKE :titoloDacercare", Libro.class);
+        TypedQuery<Libro> query= entityManager.createQuery("SELECT l from Libro l where l.titolo LIKE :titoloDacercare", Libro.class);
         query.setParameter("titoloDacercare",titoloDacercare);
         return query.getResultList();
     }

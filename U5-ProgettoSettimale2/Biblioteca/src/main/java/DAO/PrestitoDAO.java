@@ -52,17 +52,18 @@ public class PrestitoDAO {
 
     }
 
-    public List<Prestito> onLoan(){
-
-            TypedQuery<Prestito> query= entityManager.createQuery("SELECT p from Prestito p where p.dataRestituzionePrevista=> :dataOdierna", Prestito.class);
-            query.setParameter("dataOdierna", LocalDate.now());
-            return query.getResultList();
-
+    public List<Prestito> onLoan() {
+        TypedQuery<Prestito> query = entityManager.createQuery(
+                "SELECT p FROM Prestito p WHERE p.dataRestituzionePrevista >= :dataOdierna",
+                Prestito.class
+        );
+        query.setParameter("dataOdierna", LocalDate.now());
+        return query.getResultList();
     }
 
     public List<Prestito> onLoanById(int id) {
         TypedQuery<Prestito> query = entityManager.createQuery(
-                "SELECT p FROM Prestito p WHERE p.dataRestituzionePrevisto >= :dataOdierna AND p.idPrestito = :id",
+                "SELECT p FROM Prestito p WHERE p.dataRestituzionePrevista >= :dataOdierna AND p.idPrestito = :id",
                 Prestito.class
         );
         query.setParameter("dataOdierna", LocalDate.now());
@@ -70,12 +71,13 @@ public class PrestitoDAO {
         return query.getResultList();
     }
 
-
-    public List<Prestito> notLoan(){
-
-        TypedQuery<Prestito> query= entityManager.createQuery("SELECT p from Prestito p where p.dataRestituzionePrevista AND p.dataRestituzioneEffettiva <:dataOdierna", Prestito.class);
+    public List<Prestito> notLoan() {
+        TypedQuery<Prestito> query = entityManager.createQuery(
+                "SELECT p FROM Prestito p WHERE p.dataRestituzioneEffettiva < :dataOdierna",
+                Prestito.class
+        );
         query.setParameter("dataOdierna", LocalDate.now());
         return query.getResultList();
-
     }
+
 }
