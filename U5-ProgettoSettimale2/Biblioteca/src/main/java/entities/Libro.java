@@ -2,12 +2,15 @@ package entities;
 
 import enums.Genere;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 
 @Entity
 @Table (name = "libri")
 public class Libro extends Catalogo{
     private String autore;
+    @Enumerated(EnumType.STRING)
     private Genere genere;
 
     public Libro(int isbn, String titolo, int annoPubblicazione, int numeroPagine, String autore, Genere genere) {
@@ -37,7 +40,7 @@ public class Libro extends Catalogo{
 
     @Override
     public String toString() {
-        return "Libro{" +
+        return super.toString() + "Libro{" +
                 "autore='" + autore + '\'' +
                 ", genere=" + genere +
                 '}';

@@ -1,9 +1,13 @@
 package DAO;
 
+import entities.Libro;
 import entities.Rivista;
 import exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class RivistaDAO {
 
@@ -46,4 +50,29 @@ public class RivistaDAO {
         System.out.println("rivista "+daEliminare+" è stata eliminata");
 
     }
+
+    public List<Rivista> findByYear(int anno) {
+        TypedQuery<Rivista> query = entityManager.createQuery(
+                "SELECT l FROM Rivista l WHERE l.annoPubblicazione = :anno", Rivista.class
+        );
+        query.setParameter("anno", anno);
+        return query.getResultList();
+    }
+
+    public List<Rivista> findByAutor(String autore){
+        String autoreDacercare=autore+"%";
+        TypedQuery<Rivista> query= entityManager.createQuery("SELECT l from Libro l where l.autore LIKE :autoreDacercare", Rivista.class);
+        query.setParameter("autoreDacercare",autoreDacercare);
+        return query.getResultList();
+    }
+
+    public List<Rivista> findByTitol(String titolo){
+        String titoloDacercare = "%" + titolo + "%";
+        TypedQuery<Rivista> query = entityManager.createQuery(
+                "SELECT l FROM Rivista l WHERE l.titolo LIKE :titoloDacercare", Rivista.class
+        );
+        query.setParameter("titoloDacercare", titoloDacercare);
+        return query.getResultList();
+    }
+
 }

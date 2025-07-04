@@ -5,6 +5,9 @@ import entities.Rivista;
 import exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+
+import java.util.List;
 
 public class LibriDao {
 
@@ -47,4 +50,24 @@ public class LibriDao {
         System.out.println("libro "+daEliminare+" è stato eliminato");
 
     }
+
+    public List<Libro> findByYear(int anno){
+        TypedQuery<Libro> query= entityManager.createQuery("SELECT l from Libro l where l.annoPubblicazione= :anno", Libro.class);
+        query.setParameter("anno",anno);
+        return query.getResultList();
+    }
+    public List<Libro> findByAutor(String autore){
+        String autoreDacercare=autore+"%";
+        TypedQuery<Libro> query= entityManager.createQuery("SELECT l from Libro l where l.autore LIKE :autoreDacercare", Libro.class);
+        query.setParameter("autoreDacercare",autoreDacercare);
+        return query.getResultList();
+    }
+
+    public List<Libro> findByTitol(String titolo){
+        String titoloDacercare="%"+titolo+"%";
+        TypedQuery<Libro> query= entityManager.createQuery("SELECT l from Libro l where l.autore LIKE :titoloDacercare", Libro.class);
+        query.setParameter("titoloDacercare",titoloDacercare);
+        return query.getResultList();
+    }
+
 }

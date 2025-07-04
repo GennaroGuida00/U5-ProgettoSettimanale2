@@ -5,6 +5,10 @@ import entities.Prestito;
 import exceptions.NotFoundException;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
+
+import java.time.LocalDate;
+import java.util.List;
 
 public class PrestitoDAO {
 
@@ -45,6 +49,33 @@ public class PrestitoDAO {
         et.commit();
 
         System.out.println("il prestito "+daEliminare+" è stato eliminato");
+
+    }
+
+    public List<Prestito> onLoan(){
+
+            TypedQuery<Prestito> query= entityManager.createQuery("SELECT p from Prestito p where p.dataRestituzionePrevista=> :dataOdierna", Prestito.class);
+            query.setParameter("dataOdierna", LocalDate.now());
+            return query.getResultList();
+
+    }
+
+    public List<Prestito> onLoanById(int id) {
+        TypedQuery<Prestito> query = entityManager.createQuery(
+                "SELECT p FROM Prestito p WHERE p.dataRestituzionePrevisto >= :dataOdierna AND p.idPrestito = :id",
+                Prestito.class
+        );
+        query.setParameter("dataOdierna", LocalDate.now());
+        query.setParameter("id", id);
+        return query.getResultList();
+    }
+
+
+    public List<Prestito> notLoan(){
+
+        TypedQuery<Prestito> query= entityManager.createQuery("SELECT p from Prestito p where p.dataRestituzionePrevista AND p.dataRestituzioneEffettiva <:dataOdierna", Prestito.class);
+        query.setParameter("dataOdierna", LocalDate.now());
+        return query.getResultList();
 
     }
 }
